@@ -15,7 +15,7 @@ project:
 
   # List your project's source files here. Source files must be in ./src and you must list each source file separately, one per line:
   source_files:
-    - "tt_um_tinytpu_top.v"
+    - "tt_um_revenantx86_tinytpu.v"
     - "dff_mem.v"
     - "input_control.v"
     - "mac.v"
