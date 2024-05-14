@@ -25,32 +25,26 @@ module tt_um_revenantx86_tinytpu
   wire data_out_z;
   wire tx_ready;
   //
-  //assign rst = ~rst_n;
+  assign rst = ~rst_n;
   //
   /*
     Assign IO
   */
   // Input Assign
-  ui_in[0] = data_in_x;
-  ui_in[1] = data_in_y;
-  ui_in[2] = load_en;
-  ui_in[3] = init;
-
+  assign ui_in[0] = data_in_x;
+  assign ui_in[1] = data_in_y;
+  assign ui_in[2] = load_en;
+  assign ui_in[3] = init;
+  
   // Output Assign
-  uo_out[0] = data_out_z;
-  uo_out[1] = tx_ready;
-  uo_out[2] = 0;
-  uo_out[3] = 0;
-  uo_out[4] = 0;
-  uo_out[5] = 0;
-  uo_out[6] = 0;
-  uo_out[7] = 0;
-  
-  // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
-  assign uio_out = 0;
-  assign uio_oe  = 0;
-  
+  assign uo_out[0] = data_out_z;
+  assign uo_out[1] = tx_ready;
+  assign uo_out[2] = 0;
+  assign uo_out[3] = 0;
+  assign uo_out[4] = 0;
+  assign uo_out[5] = 0;
+  assign uo_out[6] = 0;
+  assign uo_out[7] = 0;
 
   tinytpu_top #(.D_W(8), .N(2), .WORD(4)) 
       tinytpu_top_inst (
