@@ -183,11 +183,11 @@ begin
     always@(posedge clk)
     begin
         if (rst) begin
-            addr_x_ram[x]  <= addr_x_ram[x-1]; 
-            rd_en_x_ram[x] <= rd_en_x_ram[x-1];
+            addr_x_ram[x]  <= 0; 
+            rd_en_x_ram[x] <= 0;
             // Assign for Y column 
-            addr_y_ram[x] <= addr_y_ram[x-1];
-            rd_en_y_ram[x] <= rd_en_y_ram[x-1];
+            addr_y_ram[x] <= 0;
+            rd_en_y_ram[x] <= 0;
         end
         else if(STATE == TRANSFER) begin
             // Assign for X row
