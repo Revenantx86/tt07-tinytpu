@@ -6,7 +6,7 @@ module systolic #
 (
     input   wire             clk,                   // Clock Input
     input   wire             rst,                   // Reset cores & Regs
-    input   reg              init,                  // Init process
+    input   wire             init,                  // Init process
     //input   wire [D_W-1:0]   x        [N-1:0],       // Row input
     //input   wire [D_W-1:0]   y        [N-1:0],       // Column input
     //output  reg  [2*D_W-1:0] z        [N-1:0][N-1:0] // MAC unit indv outputs
