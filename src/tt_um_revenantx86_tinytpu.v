@@ -31,10 +31,11 @@ module tt_um_revenantx86_tinytpu
     Assign IO
   */
   // Input Assign
-  data_in_x = ui_in[0];
-  data_in_y = ui_in[1];
-  load_en = ui_in[2];
-  init = ui_in[3];
+  ui_in[0] = data_in_x;
+  ui_in[1] = data_in_y;
+  ui_in[2] = load_en;
+  ui_in[3] = init;
+  
   // Output Assign
   uo_out[0] = data_out_z;
   uo_out[1] = tx_ready;
