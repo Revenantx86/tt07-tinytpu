@@ -112,15 +112,15 @@ always @(posedge clk) begin
         data_in_x_reg <= 0;
         data_in_y_reg <= 0;
         //
-        wr_en_x_ram[0] <= 0;
         rd_en_x_ram[0] <= 0;
-        wr_en_y_ram[0] <= 0;
         rd_en_y_ram[0] <= 0;
         for(i=0;i<N;i=i+1) begin
             // Reset X
             addr_x_ram[i]  <= 0;
+            wr_en_x_ram[i] <= 0;
             // Reset Y
-            addr_y_ram[i]  <= 0;                
+            addr_y_ram[i]  <= 0;    
+            wr_en_y_ram[i] <= 0;            
         end
         //
     end
@@ -203,10 +203,6 @@ begin
             // Assign for Y column 
             addr_y_ram[x] <= addr_y_ram[x-1];
             rd_en_y_ram[x] <= rd_en_y_ram[x-1];
-        end
-        else if (STATE == IDLE) begin
-            rd_en_x_ram[N-1] <= 0;
-            rd_en_y_ram[N-1] <= 0;
         end
     end
 end
