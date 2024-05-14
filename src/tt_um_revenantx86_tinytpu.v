@@ -25,7 +25,7 @@ module tt_um_revenantx86_tinytpu
   wire data_out_z;
   wire tx_ready;
   //
-  assign rst = ~rst_n;
+  //assign rst = ~rst_n;
   //
   /*
     Assign IO
@@ -35,7 +35,7 @@ module tt_um_revenantx86_tinytpu
   ui_in[1] = data_in_y;
   ui_in[2] = load_en;
   ui_in[3] = init;
-  
+
   // Output Assign
   uo_out[0] = data_out_z;
   uo_out[1] = tx_ready;
