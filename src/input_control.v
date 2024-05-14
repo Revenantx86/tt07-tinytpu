@@ -123,10 +123,10 @@ always @(posedge clk) begin
                 addr_counter <= 0;
                 // X Row
                 wr_en_x_ram[N-1] <= 0;
-                rd_en_x_ram[N-1] <= 0;
+                //rd_en_x_ram[N-1] <= 0;
                 // Y Column
                 wr_en_y_ram[N-1] <= 0;
-                rd_en_y_ram[N-1] <= 0;
+                //rd_en_y_ram[N-1] <= 0;
             end
             LOAD: begin
                 //
