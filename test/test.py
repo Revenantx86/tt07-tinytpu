@@ -44,19 +44,19 @@ async def test_project(dut):
     #dut.uio_in.value = 30
 
     #Load Data
-    dut.ui_in[0] <= 1; # Enable load
+    dut.ui_in[0].value <= 1; # Enable load
     for i in range(32):
-        dut.ui_in[0] <= random.randint(0, 1)  # data_in_x
-        dut.ui_in[1] <= random.randint(0, 1)  # data_in_y
+        dut.ui_in[0].value <= random.randint(0, 1)  # data_in_x
+        dut.ui_in[1].value <= random.randint(0, 1)  # data_in_y
         await Timer(40, units="ns")
 
-    dut.ui_in[2] <= 0  # De assert load
+    dut.ui_in[2].value <= 0  # De assert load
     await Timer(120, units="ns")  # Waiting period
 
     # Initialize
-    dut.ui_in[3] <= 1  # init
+    dut.ui_in[3].value <= 1  # init
     await Timer(40, units="ns")
-    dut.ui_in[3] <= 0  # init
+    dut.ui_in[3].value <= 0  # init
 
     bit_counter = 0
     index_counter = 0
@@ -69,7 +69,7 @@ async def test_project(dut):
     for _ in range(N*N*16):
         await RisingEdge(dut.clk)
         bit_counter += 1
-        data = (int(dut.uo_out[0]) << (2 * D_W - 1)) | (data >> 1)
+        data = (int(dut.uo_out[0].value) << (2 * D_W - 1)) | (data >> 1)
         
         if index_counter == 0 and bit_counter == (2 * D_W) - 1:
             cc11 = data
