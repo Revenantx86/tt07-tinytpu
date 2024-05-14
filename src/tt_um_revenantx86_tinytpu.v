@@ -47,6 +47,7 @@ module tt_um_revenantx86_tinytpu
   assign uo_out[7] = 0;
 
   assign uio_oe = 8'b00;
+  assign uio_out = 8'b0;
 
   tinytpu_top #(.D_W(8), .N(2), .WORD(4)) 
       tinytpu_top_inst (
