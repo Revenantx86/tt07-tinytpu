@@ -196,17 +196,13 @@ begin
             addr_y_ram[x] <= 0;
             rd_en_y_ram[x] <= 0;
         end
-        else if(STATE == TRANSFER) begin
+        else if(STATE == TRANSFER || STATE == IDLE ) begin
             // Assign for X row
             addr_x_ram[x]  <= addr_x_ram[x-1]; 
             rd_en_x_ram[x] <= rd_en_x_ram[x-1];
             // Assign for Y column 
             addr_y_ram[x] <= addr_y_ram[x-1];
             rd_en_y_ram[x] <= rd_en_y_ram[x-1];
-        end
-        else if (STATE == IDLE && x== 1) begin
-            rd_en_x_ram[N-1] <= 0;
-            rd_en_y_ram[N-1] <= 0;
         end
     end
 end
