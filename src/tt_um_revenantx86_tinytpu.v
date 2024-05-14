@@ -18,7 +18,7 @@ module tt_um_revenantx86_tinytpu
 );
   //
   wire rst;
-  wire data_in_x = ;
+  wire data_in_x;
   wire data_in_y;
   wire load_en;
   wire init;
