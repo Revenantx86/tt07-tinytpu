@@ -12,7 +12,8 @@ module input_control #
     input wire load_en,
     input wire init,
     output reg [(N*D_W)-1:0] out_x_flat,
-    output reg [(N*D_W)-1:0] out_y_flat
+    output reg [(N*D_W)-1:0] out_y_flat,
+    output reg out_init
 );
 //
 /*
@@ -69,22 +70,28 @@ endgenerate
 always @(posedge clk) begin
     if(rst) begin
         STATE <= IDLE;
+        out_init <= 0; 
     end
     else begin
         case(STATE) 
         IDLE: begin
+            out_init <= 0; 
             if(load_en) 
                 STATE <= LOAD;
-            else if(init)
+            else if(init)begin
+                out_init <= 1; 
                 STATE <= TRANSFER;
+            end
         end
         LOAD: begin
             if(!load_en)
                 STATE <= IDLE;
         end
         TRANSFER: begin
-            if(rd_en_x_ram[N-1]) 
+            out_init <= 0; 
+            if(rd_en_x_ram[N-1]) begin
                 STATE <= IDLE;
+            end
         end
         endcase
     end
@@ -196,6 +203,10 @@ begin
             // Assign for Y column 
             addr_y_ram[x] <= addr_y_ram[x-1];
             rd_en_y_ram[x] <= rd_en_y_ram[x-1];
+        end
+        else if (STATE == IDLE) begin
+            rd_en_x_ram[N-1] <= 0;
+            rd_en_y_ram[N-1] <= 0;
         end
     end
 end

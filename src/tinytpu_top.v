@@ -19,6 +19,7 @@ module tinytpu_top #
 wire [(N*D_W)-1:0]     out_x_flat;
 wire [(N*D_W)-1:0]     out_y_flat;
 wire [(N*N*2*D_W)-1:0] out_z_flat;
+wire out_init;
 //wire  [D_W-1:0]   data_core_x  [N-1:0];
 //wire  [D_W-1:0]   data_core_y  [N-1:0];
 //wire  [2*D_W-1:0] data_core_z   [N-1:0][N-1:0];
@@ -35,7 +36,8 @@ input_control #(.D_W(D_W), .N(N), .WORD(WORD))
                         .load_en(load_en),
                         .init(init),
                         .out_x_flat(out_x_flat),
-                        .out_y_flat(out_y_flat)
+                        .out_y_flat(out_y_flat),
+                        .out_init(out_init)
                      );
 /*
     Output Control Module
@@ -56,7 +58,7 @@ systolic #(.D_W(D_W), .N(N))
         systolic_inst (
                         .clk(clk),
                         .rst(rst),
-                        .init(init),
+                        .init(out_init),
                         .x_flat(out_x_flat),
                         .y_flat(out_y_flat),
                         .z_flat(out_z_flat)
