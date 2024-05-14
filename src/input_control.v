@@ -123,10 +123,8 @@ always @(posedge clk) begin
                 addr_counter <= 0;
                 // X Row
                 wr_en_x_ram[N-1] <= 0;
-                //rd_en_x_ram[N-1] <= 0;
                 // Y Column
                 wr_en_y_ram[N-1] <= 0;
-                //rd_en_y_ram[N-1] <= 0;
             end
             LOAD: begin
                 //
@@ -188,7 +186,7 @@ begin
             // Assign for X row
             addr_x_ram[x] <= addr_x_ram[x-1]; 
             rd_en_x_ram[x]   <= rd_en_x_ram[x-1];
-            // ASsign for Y column 
+            // Assign for Y column 
             addr_y_ram[x] <= addr_y_ram[x-1];
             rd_en_y_ram[x] <= rd_en_y_ram[x-1];
         end
