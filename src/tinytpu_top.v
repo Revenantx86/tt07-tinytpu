@@ -1,4 +1,4 @@
-module top #
+module tinytpu_top #
 (
     parameter D_W = 8,
     parameter N = 2,
