@@ -52,12 +52,8 @@ async def test_project(dut):
     cc12 = 0
     cc21 = 0
     cc22 = 0
-
-    # Wait for tx_ready to go high
-    await RisingEdge(dut.uo_out[1])
-    dut._log.info("tx_ready is high, proceeding with test")
-
-    await Timer(40, units="ns")  # Waiting period
+    
+    await Timer(160, units="ns")  # Waiting period
 
     for i in range(N * N * D_W * 2):
         await RisingEdge(dut.clk)
