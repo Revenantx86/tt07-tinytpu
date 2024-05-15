@@ -38,11 +38,6 @@ async def test_project(dut):
 
     dut._log.info("Test project behavior")
 
-
-    # Set the input values you want to test
-    #dut.ui_in.value = 20
-    #dut.uio_in.value = 30
-
     #Load Data
     dut.ui_in[0].value <= 1; # Enable load
     for i in range(32):
@@ -66,9 +61,14 @@ async def test_project(dut):
     cc21 = 0
     cc22 = 0
     #
-    await Timer(120, units="ns")  # Waiting period
+
+    # Wait for tx_ready to go high
+    await RisingEdge(dut.tx_ready)
+    cocotb.log.info("tx_ready is high, proceeding with test")
+
+    await Timer(40, units="ns")  # Waiting period
     #
-    for i in range(N*N*16):
+    for i in range(N*N*D_W*2):
         await RisingEdge(dut.clk)
         bit_counter += 1
         data = (int(dut.uo_out[0].value) << (2 * D_W - 1)) | (data >> 1)
@@ -82,8 +82,11 @@ async def test_project(dut):
         elif index_counter == 3 and bit_counter == (2 * D_W) - 1:
             cc22 = data
         #
+        await Timer(40, units="ns")  # Waiting period
+        #
         if bit_counter == (2 * D_W) - 1:
             index_counter += 1
+        #
 
     await Timer(TEST_DURATION, units="ns")  # End simulation after a set duration
     
