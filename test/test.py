@@ -63,7 +63,7 @@ async def test_project(dut):
     #
 
     # Wait for tx_ready to go high
-    await RisingEdge(dut.uo_out[1].value == 1)
+    await RisingEdge(dut.uo_out[1].value)
     cocotb.log.info("tx_ready is high, proceeding with test")
 
     await Timer(40, units="ns")  # Waiting period
