@@ -65,12 +65,14 @@ async def test_project(dut):
     cc12 = 0
     cc21 = 0
     cc22 = 0
-
-    for _ in range(N*N*16):
+    #
+    await Timer(120, units="ns")  # Waiting period
+    #
+    for i in range(N*N*16):
         await RisingEdge(dut.clk)
         bit_counter += 1
         data = (int(dut.uo_out[0].value) << (2 * D_W - 1)) | (data >> 1)
-        
+        #
         if index_counter == 0 and bit_counter == (2 * D_W) - 1:
             cc11 = data
         elif index_counter == 1 and bit_counter == (2 * D_W) - 1:
@@ -79,7 +81,7 @@ async def test_project(dut):
             cc21 = data
         elif index_counter == 3 and bit_counter == (2 * D_W) - 1:
             cc22 = data
-
+        #
         if bit_counter == (2 * D_W) - 1:
             index_counter += 1
 

@@ -27,7 +27,7 @@ reg        STATE;
 reg [$clog2(2*D_W)-1:0] bit_counter;
 reg [$clog2(N)-1:0]     column_counter;
 reg [$clog2(N)-1:0]     row_counter;
-
+//
 wire [2*D_W-1:0]        data_tx_reg;
 //
 //
@@ -87,8 +87,10 @@ always @(posedge clk) begin
                     column_counter <= column_counter + 1;
                     bit_counter    <= 0;
                 end
-                if(column_counter == N-1 && bit_counter == (2*D_W-1))
+                if(column_counter == N-1 && bit_counter == (2*D_W-1)) begin
+                    column_counter <= 0;
                     row_counter   <= row_counter + 1;
+                end
                 //
             end
         endcase

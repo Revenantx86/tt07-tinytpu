@@ -1,8 +1,8 @@
-module tinytpu_top #
+module top #
 (
     parameter D_W = 8,
     parameter N = 2,
-    parameter WORD = 8
+    parameter WORD = 2
 )
 (
     input  wire clk,
@@ -11,8 +11,8 @@ module tinytpu_top #
     input  wire data_in_y,
     input  wire load_en,
     input  wire init,
-    output wire  data_out_z,
-    output wire  tx_ready
+    output wire data_out_z,
+    output reg  tx_ready
 );
 //
 // REG & WIRES
@@ -20,6 +20,11 @@ wire [(N*D_W)-1:0]     out_x_flat;
 wire [(N*D_W)-1:0]     out_y_flat;
 wire [(N*N*2*D_W)-1:0] out_z_flat;
 wire out_init;
+reg tx_ready_reg;
+
+always @(posedge clk) begin
+    tx_ready <= tx_ready_reg;
+end 
 //wire  [D_W-1:0]   data_core_x  [N-1:0];
 //wire  [D_W-1:0]   data_core_y  [N-1:0];
 //wire  [2*D_W-1:0] data_core_z   [N-1:0][N-1:0];
@@ -49,7 +54,7 @@ output_control #(.D_W(D_W), .N(N))
                                 .core_out_z(out_z_flat),
                                 .init(init),
                                 .data_out_z(data_out_z),
-                                .tx_ready(tx_ready)
+                                .tx_ready(tx_ready_reg)
                             );
 /*
     Systolic Core
