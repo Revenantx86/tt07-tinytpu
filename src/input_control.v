@@ -151,7 +151,7 @@ always @(posedge clk) begin
                     wr_en_y_ram[ram_counter] <= 1;
                 end
                 //
-                if(wr_en_x_ram[ram_counter]== 1) begin
+                if(wr_en_x_ram[ram_counter] == 1) begin
                     // X Row
                     addr_x_ram[ram_counter]  <= addr_x_ram[ram_counter] + 1;
                     // X Row
