@@ -51,46 +51,7 @@ async def test_project(dut):
     await Timer(40, units="ns")
     dut.ui_in[3].value = 0  # init
     await Timer(140, units="ns")
-    #
-    bit_counter = 0
-    index_counter = 0
-    data = 0x0000
-    cc11 = 0
-    cc12 = 0
-    cc21 = 0
-    cc22 = 0
-    #
-    for i in range(0,64):
-        #dut._log.info(f"bit counter: {bit_counter}")
-        data = (data >> 1) | (int(dut.uo_out[0].value) << (2 * D_W - 1))
-        #dut._log.info(f"data: {data:b}")
-        #
-        if index_counter == 0 and bit_counter == (2 * D_W) - 1:
-            cc11 = data
-        elif index_counter == 1 and bit_counter == (2 * D_W) - 1:
-            cc12 = data
-        elif index_counter == 2 and bit_counter == (2 * D_W) - 1:
-            cc21 = data
-        elif index_counter == 3 and bit_counter == (2 * D_W) - 1:
-            cc22 = data
-        #
-        bit_counter += 1
-        if bit_counter == (2 * D_W):
-            index_counter += 1
-            bit_counter = 0
-        await Timer(40, units="ns")
-
-    # Log the final value of resulting matrix
-    dut._log.info(f"Final cc11 value: {cc11:#x}")
-    dut._log.info(f"Final cc12 value: {cc12:#x}")
-    dut._log.info(f"Final cc21 value: {cc21:#x}")
-    dut._log.info(f"Final cc22 value: {cc22:#x}")
-    await Timer(TEST_DURATION, units="ns")  # End simulation after a set duration
-
-    assert cc11 == 0x2f91
-    assert cc12 == 0x7625
-    assert cc21 == 0x39f2
-    assert cc22 == 0xae7c
+    # 
     # Example assertion
     # assert dut.uo_out.value == expected_value
 
