@@ -35,7 +35,7 @@ always @(*) begin
         data_out <= 0;  // Update output only if rd_en is high
     end 
     else if(rst) begin
-        data_out <= 0;          // Optionally reset the output to 0 on reset
+        data_out <= 0;  // Optionally reset the output to 0 on reset
     end
 end
 
